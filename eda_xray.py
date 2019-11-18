@@ -4,7 +4,7 @@ def load_xray(data):
     # dropping last empty column
     df.columns = ['imgindex', 'label', 'followup', 'patientID',
                   'age', 'gender', 'viewposition', 'width',
-                  'height]', 'x', 'y', 'drop']
+                  'height', 'x', 'y', 'drop']
     df = df.drop(df.columns[-1], axis=1)
 
     df['path'] = 'data/images/'
