@@ -2,13 +2,39 @@ from skimage import data, img_as_float
 from skimage import exposure
 import matplotlib.pyplot as plt
 
+def image_check(x_train):
+    w = 25
+    h = 25
+    fig = plt.figure(figsize=(15, 15))
+    columns = 3
+    rows = 3
+    ax = []
+    for i in range(columns*rows):
+        img = x_train[i,:,:,:]
+
+        ax.append( fig.add_subplot(rows, columns, i+1) )
+        ax[i].set_axis_off()
+    #     ax[-1].set_title("ax:"+str(i))  # set title
+        plt.imshow(img)
+    plt.show();
+
+
+
+
+
+
+
+
+
+
 def plot_history_accuracy(model_history):
     history = model_history.history
     loss_values = history['loss']
     val_loss_values = history['val_loss']
     acc_values = history['accuracy']
     val_acc_values = history['val_accuracy']
-
+    topk_acc_values = history['top_k_categorical_accuracy']
+    topk_val_values = history['val_top_k_categorical_accuracy']
 
     epochs = range(1, len(loss_values) + 1)
 
@@ -17,7 +43,7 @@ def plot_history_accuracy(model_history):
     plt.plot(epochs, loss_values, 'g.', label='Training loss')
     plt.plot(epochs, val_loss_values, 'g', label='Validation loss')
 
-    plt.title('Training and validation loss')
+    plt.title('Training and Validation Loss')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
@@ -25,15 +51,15 @@ def plot_history_accuracy(model_history):
     plt.subplot(132)
     plt.plot(epochs, acc_values, 'r.', label='Training acc')
     plt.plot(epochs, val_acc_values, 'r', label='Validation acc')
-    plt.title('Training and validation accuracy')
+    plt.title('Training and Validation Accuracy')
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
 
     plt.subplot(133)
-    plt.plot(epochs, acc_values, 'b.', label='Training acc')
-    plt.plot(epochs, val_acc_values, 'b', label='Validation acc')
-    plt.title('Training and validation Top K Categorical accuracy')
+    plt.plot(epochs, topk_acc_values, 'b.', label='Top 5 Categorical Training acc')
+    plt.plot(epochs, topk_val_values, 'b', label='Top 5 Categorical Validation acc')
+    plt.title('Training and Validation Top 5 Categorical Accuracy')
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
@@ -61,7 +87,7 @@ def plot_img_and_hist(image, axes, bins=256):
     ax_cdf = ax_hist.twinx()
 
     # Display image
-    ax_img.imshow(image, cmap=plt.cm.gray)
+    ax_img.imshow(image, cmap=plt.cm.gray);
     ax_img.set_axis_off()
 
     # Display histogram
