@@ -1,6 +1,8 @@
 from skimage import data, img_as_float
 from skimage import exposure
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 def image_check(x_train):
     w = 25
@@ -20,60 +22,58 @@ def image_check(x_train):
 
 
 
+def plot_history_log(log):
+    """
+    Takes the model_log file as an input.
+    model_log has to be in a pandas DataFrame object e.g. model_log = pd.read_csv('cnnmodels/baseline_training.csv')
+    Returns a plotly plot with training and validation accuracies and losses.
+    """
+    epoch = log.epoch
+    fig = make_subplots(
+        rows=1, cols=3,
+        subplot_titles=("Training and Validation Loss",
+                        "Training and Validation Accuracy",
+                        "Top 5 Predictions Training and Validation Accuracy"))
 
+    fig.add_trace(go.Scatter(x=epoch, y=log.loss,
+                             mode='markers',
+                             name='Training Loss',
+                             marker_color='red'),
+                  row=1, col=1)
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_loss, 
+                             name='Validation Loss'),
+                  row=1, col=1)
 
+    fig.add_trace(go.Scatter(x=epoch, y=log.accuracy,
+                             mode='markers',
+                            name='Training Accuracy',
+                             marker_color='lightseagreen'),
+                  row=1, col=2)
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_accuracy, 
+                             name='Validation Accuracy',
+                             marker_color='lightseagreen'),
+                  row=1, col=2)
 
+    fig.add_trace(go.Scatter(x=epoch, y=log.top_k_categorical_accuracy,
+                             mode='markers',
+                            name='Top 5 Predictions Training Accuracy',
+                             marker_color='blueviolet'),
+                  row=1, col=3)
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_top_k_categorical_accuracy, 
+                             name='Top 5 Predictions Validation Accuracy',
+                             marker_color='blueviolet'),
+                  row=1, col=3)
 
+    fig.update_yaxes(title_text="Loss", row=1, col=1)
+    fig.update_yaxes(title_text="Accuracy", row=1, col=2)
+    fig.update_yaxes(title_text="Accuracy", row=1, col=3)
+    for col in [1, 2, 3]:
+        fig.update_xaxes(title_text="Epoch", row=1, col=col)
+    fig.update_layout(template='plotly_white', height=500, width=1450,
+                      title_text="Model History")
 
-
-
-def plot_history_accuracy(model_history):
-    history = model_history.history
-    loss_values = history['loss']
-    val_loss_values = history['val_loss']
-    acc_values = history['accuracy']
-    val_acc_values = history['val_accuracy']
-    topk_acc_values = history['top_k_categorical_accuracy']
-    topk_val_values = history['val_top_k_categorical_accuracy']
-
-    epochs = range(1, len(loss_values) + 1)
-
-    plt.figure(figsize=(20, 8))
-    plt.subplot(131)
-    plt.plot(epochs, loss_values, 'g.', label='Training loss')
-    plt.plot(epochs, val_loss_values, 'g', label='Validation loss')
-
-    plt.title('Training and Validation Loss')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.legend()
-
-    plt.subplot(132)
-    plt.plot(epochs, acc_values, 'r.', label='Training acc')
-    plt.plot(epochs, val_acc_values, 'r', label='Validation acc')
-    plt.title('Training and Validation Accuracy')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.legend()
-
-    plt.subplot(133)
-    plt.plot(epochs, topk_acc_values, 'b.', label='Top 5 Categorical Training acc')
-    plt.plot(epochs, topk_val_values, 'b', label='Top 5 Categorical Validation acc')
-    plt.title('Training and Validation Top 5 Categorical Accuracy')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.legend()
-
-    plt.show();
-
-
-
-
-
-
-
-
-
+    fig.show()
+    
 
 
 
