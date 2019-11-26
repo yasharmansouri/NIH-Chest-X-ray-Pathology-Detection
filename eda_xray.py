@@ -30,7 +30,7 @@ def create_categorical(dataframe):
                  'Pleural_Thickening', 'Cardiomegaly', 'Nodule', 'Mass', 'Hernia']
     # create dummy variables for the labels
     for i in single_labels:
-        dataframe[i] = dataframe.label.map(lambda result: 1.0 if i in result else 0)
+        dataframe[i] = dataframe.label.map(lambda result: 1 if i in result else 0)
     # creating the target vector for cross-checking with the predictions later
     # since CNN gives out as a vector of 0s and 1s
     dataframe['target'] = dataframe.apply(lambda x: [x[single_labels].values],
