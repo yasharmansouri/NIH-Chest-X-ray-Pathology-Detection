@@ -40,7 +40,7 @@ def plot_history_log(log):
                              name='Training Loss',
                              marker_color='red'),
                   row=1, col=1)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_loss, 
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_loss,
                              name='Validation Loss'),
                   row=1, col=1)
 
@@ -49,7 +49,7 @@ def plot_history_log(log):
                             name='Training Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_accuracy, 
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_accuracy,
                              name='Validation Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
@@ -59,7 +59,7 @@ def plot_history_log(log):
                             name='Top 5 Predictions Training Accuracy',
                              marker_color='blueviolet'),
                   row=1, col=3)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_top_k_categorical_accuracy, 
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_top_k_categorical_accuracy,
                              name='Top 5 Predictions Validation Accuracy',
                              marker_color='blueviolet'),
                   row=1, col=3)
@@ -73,7 +73,7 @@ def plot_history_log(log):
                       title_text="Model History")
 
     fig.show()
-    
+
 
 
 
