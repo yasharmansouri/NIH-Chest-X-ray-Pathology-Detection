@@ -30,7 +30,7 @@ def plot_history_log(log):
     """
     epoch = log.epoch
     fig = make_subplots(
-        rows=1, cols=3,
+        rows=1, cols=2,
         subplot_titles=("Training and Validation Loss",
                         "Training and Validation Accuracy",
                         "Top 5 Predictions Training and Validation Accuracy"))
@@ -54,20 +54,10 @@ def plot_history_log(log):
                              marker_color='lightseagreen'),
                   row=1, col=2)
 
-    fig.add_trace(go.Scatter(x=epoch, y=log.top_k_categorical_accuracy,
-                             mode='markers',
-                            name='Top 5 Predictions Training Accuracy',
-                             marker_color='blueviolet'),
-                  row=1, col=3)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_top_k_categorical_accuracy,
-                             name='Top 5 Predictions Validation Accuracy',
-                             marker_color='blueviolet'),
-                  row=1, col=3)
-
     fig.update_yaxes(title_text="Loss", row=1, col=1)
     fig.update_yaxes(title_text="Accuracy", row=1, col=2)
-    fig.update_yaxes(title_text="Accuracy", row=1, col=3)
-    for col in [1, 2, 3]:
+
+    for col in [1, 2]:
         fig.update_xaxes(title_text="Epoch", row=1, col=col)
     fig.update_layout(template='plotly_white', height=500, width=1450,
                       title_text="Model History")
