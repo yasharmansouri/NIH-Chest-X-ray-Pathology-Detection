@@ -4,13 +4,12 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-def image_check(y_train):
+def image_check(x_train, y_train, all_labels):
     fig = plt.figure(figsize=(16,32))
     for i in range(32):
         ax = fig.add_subplot(8, 4, i + 1, xticks=[], yticks=[])
         ax.imshow(x_train[i][:,:,0], cmap='bone')
-        ax.set_title(', '.join([label for label, check in zip(all_labels, y_train[i]) if check==1]),
-                     fontsize=15)
+        ax.set_title(', '.join([label for label, check in zip(all_labels, y_train[i]) if check==1]), fontsize=15)
 
 
 
