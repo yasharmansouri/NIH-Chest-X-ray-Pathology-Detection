@@ -4,21 +4,13 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-def image_check(x_train):
-    w = 25
-    h = 25
-    fig = plt.figure(figsize=(15, 15))
-    columns = 3
-    rows = 3
-    ax = []
-    for i in range(columns*rows):
-        img = x_train[i,:,:,:]
-
-        ax.append( fig.add_subplot(rows, columns, i+1) )
-        ax[i].set_axis_off()
-    #     ax[-1].set_title("ax:"+str(i))  # set title
-        plt.imshow(img)
-    plt.show();
+def image_check(y_train):
+    fig = plt.figure(figsize=(16,32))
+    for i in range(32):
+        ax = fig.add_subplot(8, 4, i + 1, xticks=[], yticks=[])
+        ax.imshow(x_train[i][:,:,0], cmap='bone')
+        ax.set_title(', '.join([label for label, check in zip(all_labels, y_train[i]) if check==1]),
+                     fontsize=15)
 
 
 
@@ -32,7 +24,7 @@ def plot_history_log(log):
     fig = make_subplots(
         rows=1, cols=3,
         subplot_titles=("Training and Validation Loss",
-                        "Training and Validation Accuracy",
+                        "Training and Validation Categorical Accuracy",
                         "Training and Validation AUC"))
 
     #training and valid loss
@@ -47,21 +39,21 @@ def plot_history_log(log):
     #training and valid categorical acc
     fig.add_trace(go.Scatter(x=epoch, y=log.categorical_accuracy,
                              mode='markers',
-                            name='Training Accuracy',
+                            name='Training Categorical Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
     fig.add_trace(go.Scatter(x=epoch, y=log.val_categorical_accuracy,
-                             name='Validation Accuracy',
+                             name='Validation Categorical Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
-    #training and valid categorical auc
+    #training and valid auc
     fig.add_trace(go.Scatter(x=epoch, y=log.auc_1,
                              mode='markers',
-                            name='Training Categorical Accuracy',
+                            name='Training AUC',
                              marker_color='purple'),
                   row=1, col=3)
     fig.add_trace(go.Scatter(x=epoch, y=log.val_auc_1,
-                             name='Validation Categorical Accuracy',
+                             name='Validation AUC',
                              marker_color='purple'),
                   row=1, col=3)
 
