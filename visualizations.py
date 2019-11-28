@@ -30,11 +30,12 @@ def plot_history_log(log):
     """
     epoch = log.epoch
     fig = make_subplots(
-        rows=1, cols=2,
+        rows=1, cols=3,
         subplot_titles=("Training and Validation Loss",
                         "Training and Validation Accuracy",
-                        "Top 5 Predictions Training and Validation Accuracy"))
+                        "Training and Validation AUC"))
 
+    #training and valid loss
     fig.add_trace(go.Scatter(x=epoch, y=log.loss,
                              mode='markers',
                              name='Training Loss',
@@ -43,7 +44,7 @@ def plot_history_log(log):
     fig.add_trace(go.Scatter(x=epoch, y=log.val_loss,
                              name='Validation Loss'),
                   row=1, col=1)
-
+    #training and valid categorical acc
     fig.add_trace(go.Scatter(x=epoch, y=log.categorical_accuracy,
                              mode='markers',
                             name='Training Accuracy',
@@ -53,16 +54,31 @@ def plot_history_log(log):
                              name='Validation Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
+    #training and valid categorical auc
+    fig.add_trace(go.Scatter(x=epoch, y=log.auc_1,
+                             mode='markers',
+                            name='Training Categorical Accuracy',
+                             marker_color='purple'),
+                  row=1, col=3)
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_auc_1,
+                             name='Validation Categorical Accuracy',
+                             marker_color='purple'),
+                  row=1, col=3)
 
     fig.update_yaxes(title_text="Loss", row=1, col=1)
     fig.update_yaxes(title_text="Accuracy", row=1, col=2)
+    fig.update_yaxes(title_text="AUC", row=1, col=3)
 
-    for col in [1, 2]:
+    for col in [1, 2, 3]:
         fig.update_xaxes(title_text="Epoch", row=1, col=col)
+
     fig.update_layout(template='plotly_white', height=500, width=1450,
                       title_text="Model History")
 
     fig.show()
+    
+    
+
 
 
 
