@@ -44,12 +44,12 @@ def plot_history_log(log):
                              name='Validation Loss'),
                   row=1, col=1)
 
-    fig.add_trace(go.Scatter(x=epoch, y=log.accuracy,
+    fig.add_trace(go.Scatter(x=epoch, y=log.categorical_accuracy,
                              mode='markers',
                             name='Training Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_accuracy,
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_categorical_accuracy,
                              name='Validation Accuracy',
                              marker_color='lightseagreen'),
                   row=1, col=2)
