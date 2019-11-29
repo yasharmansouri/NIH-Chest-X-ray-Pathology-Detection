@@ -46,12 +46,12 @@ def plot_history_log(log):
                              marker_color='lightseagreen'),
                   row=1, col=2)
     #training and valid auc
-    fig.add_trace(go.Scatter(x=epoch, y=log.auc_1,
+    fig.add_trace(go.Scatter(x=epoch, y=log.auc,
                              mode='markers',
                             name='Training AUC',
                              marker_color='purple'),
                   row=1, col=3)
-    fig.add_trace(go.Scatter(x=epoch, y=log.val_auc_1,
+    fig.add_trace(go.Scatter(x=epoch, y=log.val_auc,
                              name='Validation AUC',
                              marker_color='purple'),
                   row=1, col=3)
