@@ -69,7 +69,7 @@ Due to the shortage of time and the limited budget to run models on google cloud
 
 The similar numbers between the training, validation, and test data on both models shows that the data was not overfit.
 
-Although generally, less false positives are better (mobilenet), in the medical field missing a patient with actual pathology might be much more harmful than not diagnosing them and thus one might think the basemodel can be more safe to use. The average ROC score on both models are %76 vs. %77. With more training and hyper paramaeter optimization, the mobilenet model can have better predictions.  
+Although generally, less false positives are better (mobilenet), in the medical field missing a patient with actual pathology might be much more harmful than not diagnosing them and thus one might think the basemodel can be more safe to use. The average ROC score on both models are %76 vs. %77. With more training and hyper parameter optimization, the mobilenet model can have better predictions.  
 
 
 
