@@ -2,6 +2,10 @@
 
 # Ø. Introduction
 
+- presentation file can be accessed in the _presentation_ folder:  
+Powerpoint[``](presentation/nih_chest_xray_ai_diagnosis.pptx)  
+PDF[``](presentation/nih_chest_xray_ai_diagnosis.pdf)
+
 ![baseline_layers](figs/baseline_layers.png)  
 
 - On Septemeber, 27 2017 [NIH](https://www.nih.gov/news-events/news-releases/nih-clinical-center-provides-one-largest-publicly-available-chest-x-ray-datasets-scientific-community) released one of the largest [datasets](https://nihcc.app.box.com/v/ChestXray-NIHCC) available on chest X-rays.
