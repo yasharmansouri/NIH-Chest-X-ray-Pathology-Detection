@@ -3,8 +3,10 @@
 # Ø. Introduction
 
 - presentation file can be accessed in the _presentation_ folder:  
-Powerpoint[``](presentation/nih_chest_xray_ai_diagnosis.pptx)  
-PDF[``](presentation/nih_chest_xray_ai_diagnosis.pdf)
+
+Powerpoint[`nih_chest_xray_ai_diagnosis.pptx`](presentation/nih_chest_xray_ai_diagnosis.pptx)  
+
+PDF[`nih_chest_xray_ai_diagnosis.pdf`](presentation/nih_chest_xray_ai_diagnosis.pdf)
 
 ![baseline_layers](figs/baseline_layers.png)  
 
